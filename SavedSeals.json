@@ -1,0 +1,58 @@
+[
+  {
+    "part_name": "Example Seal 1",
+    "material": "Rubber",
+    "die_name": "example_die_1",
+    "ending_diameter": 5.0,
+    "notes": "example_notes_1"
+  },
+  {
+    "part_name": "Example Seal 2",
+    "material": "Silicone",
+    "die_name": "example_die_2",
+    "ending_diameter": 6.0,
+    "notes": "example_notes_2"
+  },
+  {
+    "part_name": "Example Seal 3",
+    "material": "Plastic",
+    "die_name": "example_die_3",
+    "ending_diameter": 4.5,
+    "notes": "example_notes_3"
+  },
+  {
+    "part_name": "Example Seal",
+    "material": "Rubber",
+    "die_name": "example_die",
+    "ending_diameter": 5.0,
+    "notes": "example_notes"
+  },
+  {
+    "part_name": "<PyQt5.QtWidgets.QLineEdit object at 0x7f8d0063b0>",
+    "material": "Rubber",
+    "die_name": "example_die",
+    "ending_diameter": 5.0,
+    "notes": "example_notes"
+  },
+  {
+    "part_name": "Nick",
+    "material": "Rubber",
+    "die_name": "example_die",
+    "ending_diameter": 5.0,
+    "notes": "example_notes"
+  },
+  {
+    "part_name": "Nick5",
+    "material": "Rubber",
+    "die_name": "example_die",
+    "ending_diameter": 5.0,
+    "notes": "example_notes"
+  },
+  {
+    "part_name": "part_1",
+    "material": "material_1",
+    "die_name": "die_1",
+    "ending_diameter": "diameter_1",
+    "notes": "note_1"
+  }
+]
