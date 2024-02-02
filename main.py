@@ -7,6 +7,11 @@ class MyGUI(QMainWindow):
         super(MyGUI, self).__init__()
         uic.loadUi("HomePage.ui", self)
         self.show()
+        self.create_new_button.clicked.connect(self.login)
+
+    def login(self):
+        uic.loadUi("CreateNew.ui", self)
+        self.show()
 
 
 

@@ -40,10 +40,10 @@
      <string>Edit Library</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="create_new_button">
     <property name="geometry">
      <rect>
-      <x>588</x>
+      <x>590</x>
       <y>150</y>
       <width>181</width>
       <height>51</height>
