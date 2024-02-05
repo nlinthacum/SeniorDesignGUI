@@ -28,13 +28,6 @@
     "notes": "example_notes"
   },
   {
-    "part_name": "<PyQt5.QtWidgets.QLineEdit object at 0x7f8d0063b0>",
-    "material": "Rubber",
-    "die_name": "example_die",
-    "ending_diameter": 5.0,
-    "notes": "example_notes"
-  },
-  {
     "part_name": "Nick",
     "material": "Rubber",
     "die_name": "example_die",
@@ -54,5 +47,19 @@
     "die_name": "die_1",
     "ending_diameter": "diameter_1",
     "notes": "note_1"
+  },
+  {
+    "part_name": "my part",
+    "material": "copper 52 ",
+    "die_name": "die #15",
+    "ending_diameter": "74",
+    "notes": ""
+  },
+  {
+    "part_name": "",
+    "material": "",
+    "die_name": "",
+    "ending_diameter": "",
+    "notes": ""
   }
 ]

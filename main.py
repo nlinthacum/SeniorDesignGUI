@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
+from PyQt5.QtWidgets import QApplication, QWidget, QListWidget, QListWidgetItem, QVBoxLayout
 import json
 
 class HomePageGUI(QMainWindow):
@@ -9,12 +10,16 @@ class HomePageGUI(QMainWindow):
         uic.loadUi("HomePage.ui", self)
         self.show()
         self.create_new_button.clicked.connect(self.OpenCreateNew)
+        self.load_library_button.clicked.connect(self.OpenLoadLibrary)
         
         self.saved_seals_handler = SavedSeals()
         self.saved_seals_handler.load_seals()
 
     def OpenCreateNew(self):
         self.create_new_gui = CreateNewGUI(self.saved_seals_handler)
+
+    def OpenLoadLibrary(self):
+        self.load_library_gui = LoadFromLibraryGUI(self.saved_seals_handler)
 
 class CreateNewGUI(QMainWindow):
     def __init__(self, saved_seals_handler):
@@ -25,12 +30,35 @@ class CreateNewGUI(QMainWindow):
         self.saved_seals_handler = saved_seals_handler
         self.saved_seals_handler.load_seals()
      
-     #TODO update these values wiith real values
     def CreateNewSaved(self):  
         new_seal = Seal(part_name=str(self.part_name_line.text()), material=str(self.material_line.text()), die_name=str(self.die_name_line.text()), ending_diameter=str(self.ending_diameter_line.text()), notes=str(self.notes_line.text()))
         self.saved_seals_handler.saved_seals.append(new_seal.to_dict())
         self.saved_seals_handler.save_seals()
+        self.close()
 
+
+# LoadFromLibraryList is name of list
+class LoadFromLibraryGUI(QMainWindow):
+    def __init__(self, saved_seals_handler):
+        super(LoadFromLibraryGUI, self).__init__()
+        uic.loadUi("LoadFromLibrary.ui", self)
+        self.show()
+        self.saved_seals_handler = saved_seals_handler
+        self.saved_seals_handler.load_seals()
+        self.PopulateList(saved_seals_handler)
+
+    
+    def PopulateList(self, saved_seals_handler):
+        # self.list_widget = QListWidget()
+        # LoadFromLibraryList
+        # Populate QListWidget with data
+        for item_data in self.saved_seals_handler.saved_seals:
+            list_item = QListWidgetItem(f"{item_data['part_name']} - {item_data['material']} - {item_data['die_name']}")
+
+            list_item.setData(1, item_data)  # Store the entire data in the item's data
+            self.LoadFromLibraryList.addItem(list_item)
+
+        
 
 
 class Seal:
@@ -71,6 +99,7 @@ class SavedSeals:
     def save_seals(self):
         with open("SavedSeals.json", 'w') as f:
             json.dump(self.saved_seals, f, indent=2)
+
     
 
 
