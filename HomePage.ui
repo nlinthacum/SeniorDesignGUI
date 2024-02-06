@@ -27,7 +27,7 @@
      <string>Load from Library</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="edit_library_button">
     <property name="geometry">
      <rect>
       <x>588</x>

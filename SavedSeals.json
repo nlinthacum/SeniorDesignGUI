@@ -7,10 +7,10 @@
     "notes": "example_notes_1"
   },
   {
-    "part_name": "Example Seal 2",
-    "material": "Silicone",
-    "die_name": "example_die_2",
-    "ending_diameter": 6.0,
+    "part_name": "Example Seal 20",
+    "material": "Silicon",
+    "die_name": "example_die_2!",
+    "ending_diameter": "6.0",
     "notes": "example_notes_2"
   },
   {
@@ -23,50 +23,8 @@
   {
     "part_name": "Example Seal",
     "material": "Rubber",
-    "die_name": "example_die",
-    "ending_diameter": 5.0,
+    "die_name": "example_die red",
+    "ending_diameter": "5.0",
     "notes": "example_notes"
-  },
-  {
-    "part_name": "Nick",
-    "material": "Rubber",
-    "die_name": "example_die",
-    "ending_diameter": 5.0,
-    "notes": "example_notes"
-  },
-  {
-    "part_name": "Nick5",
-    "material": "Rubber",
-    "die_name": "example_die",
-    "ending_diameter": 5.0,
-    "notes": "example_notes"
-  },
-  {
-    "part_name": "part_1",
-    "material": "material_1",
-    "die_name": "die_1",
-    "ending_diameter": "diameter_1",
-    "notes": "note_1"
-  },
-  {
-    "part_name": "my part",
-    "material": "copper 52 ",
-    "die_name": "die #15",
-    "ending_diameter": "74",
-    "notes": ""
-  },
-  {
-    "part_name": "",
-    "material": "",
-    "die_name": "",
-    "ending_diameter": "",
-    "notes": ""
-  },
-  {
-    "part_name": "xyz",
-    "material": "copper",
-    "die_name": "15",
-    "ending_diameter": "23",
-    "notes": "1223344"
   }
 ]
