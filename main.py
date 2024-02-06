@@ -19,7 +19,24 @@ class HomePageGUI(QMainWindow):
         self.create_new_gui = CreateNewGUI(self.saved_seals_handler)
 
     def OpenLoadLibrary(self):
-        self.load_library_gui = LoadFromLibraryGUI(self.saved_seals_handler)
+        self.load_library_gui = LoadFromLibraryGUI(self.saved_seals_handler, self)
+
+    def DisplayPart(self, part_idx):
+        self.saved_seals_handler.load_seals() #refresh list in case it changed
+        part = self.saved_seals_handler.saved_seals[part_idx]
+        self.part_label.setText(part['part_name'])
+        self.material_label.setText(part['material'])
+        self.die_label.setText(part['die_name'])
+        self.diameter_label.setText(str(part['ending_diameter']))
+        self.notes_label.setText(part['notes'])
+        
+
+        # self.material = material
+        # self.die_name = die_name
+        # self.ending_diameter = ending_diameter
+        # self.notes = notes
+
+
 
 class CreateNewGUI(QMainWindow):
     def __init__(self, saved_seals_handler):
@@ -39,24 +56,30 @@ class CreateNewGUI(QMainWindow):
 
 # LoadFromLibraryList is name of list
 class LoadFromLibraryGUI(QMainWindow):
-    def __init__(self, saved_seals_handler):
-        super(LoadFromLibraryGUI, self).__init__()
+    def __init__(self, saved_seals_handler, parent=None):
+        super(LoadFromLibraryGUI, self).__init__(parent)
         uic.loadUi("LoadFromLibrary.ui", self)
         self.show()
         self.saved_seals_handler = saved_seals_handler
         self.saved_seals_handler.load_seals()
         self.PopulateList(saved_seals_handler)
+        self.load_button.clicked.connect(self.LoadToMain)
 
     
     def PopulateList(self, saved_seals_handler):
-        # self.list_widget = QListWidget()
-        # LoadFromLibraryList
         # Populate QListWidget with data
         for item_data in self.saved_seals_handler.saved_seals:
             list_item = QListWidgetItem(f"{item_data['part_name']} - {item_data['material']} - {item_data['die_name']}")
 
             list_item.setData(1, item_data)  # Store the entire data in the item's data
             self.LoadFromLibraryList.addItem(list_item)
+    def LoadToMain(self):
+        # getting current selected row
+        part_idx = self.LoadFromLibraryList.currentRow()
+        print(self.parent())
+        self.parent().DisplayPart(part_idx)
+        self.close()
+
 
         
 

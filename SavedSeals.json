@@ -61,5 +61,12 @@
     "die_name": "",
     "ending_diameter": "",
     "notes": ""
+  },
+  {
+    "part_name": "xyz",
+    "material": "copper",
+    "die_name": "15",
+    "ending_diameter": "23",
+    "notes": "1223344"
   }
 ]
