@@ -22,5 +22,37 @@
     "starting_diameter": "1.2",
     "ending_diameter": "6.5",
     "notes": "High tensile strength"
+  },
+  {
+    "part_name": "test start",
+    "material": "",
+    "die_name": "",
+    "starting_diameter": "1",
+    "ending_diameter": "",
+    "notes": ""
+  },
+  {
+    "part_name": "part1",
+    "material": "steel",
+    "die_name": "",
+    "starting_diameter": "125",
+    "ending_diameter": "56",
+    "notes": ""
+  },
+  {
+    "part_name": "oring 15",
+    "material": "steel",
+    "die_name": "die xyz",
+    "starting_diameter": "1.25",
+    "ending_diameter": "5.75",
+    "notes": "part for Foo"
+  },
+  {
+    "part_name": "test15",
+    "material": "copper",
+    "die_name": "die xyz",
+    "starting_diameter": "2.88",
+    "ending_diameter": "7.85",
+    "notes": ""
   }
 ]

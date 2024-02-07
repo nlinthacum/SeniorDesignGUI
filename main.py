@@ -76,6 +76,7 @@ class CreateNewGUI(QMainWindow):
         uic.loadUi("CreateNew.ui", self)
         self.show()
         self.create_new_save_button.clicked.connect(self.CreateNewSaved)
+        self.set_starting_position_button.clicked.connect(self.SetStartingPosition)
         self.saved_seals_handler = saved_seals_handler
         self.saved_seals_handler.load_seals()
      
@@ -84,7 +85,21 @@ class CreateNewGUI(QMainWindow):
         self.saved_seals_handler.saved_seals.append(new_seal.to_dict())
         self.saved_seals_handler.save_seals()
         self.close()
-
+    def SetStartingPosition(self):
+         self.set_starting_position_gui = SetStartingPositionGUI(self.saved_seals_handler, self)
+        
+class SetStartingPositionGUI(QMainWindow):
+    def __init__(self, saved_seals_handler, parent=None):
+        super(SetStartingPositionGUI, self).__init__(parent)
+        uic.loadUi("SetStartingPosition.ui", self)
+        self.show()
+        
+        self.starting_position_save_button.clicked.connect(self.SaveStartingPosition)
+        
+    def SaveStartingPosition(self):
+        self.parent().starting_diameter_line.setText(self.measured_starting_diameter_line.text())
+        self.close()
+        
 
 # LoadFromLibraryList is name of list
 class LoadFromLibraryGUI(QMainWindow):
@@ -122,6 +137,7 @@ class EditLibraryGUI(QMainWindow):
         
         self.edit_save_button.clicked.connect(self.EditSaved)
         self.delete_part_button.clicked.connect(self.DeletePart)
+        self.edit_starting_diameter_button.clicked.connect(self.EditStartingDiameter)
         
          # Populate QListWidget with data
         for item_data in self.saved_seals_handler.saved_seals:
@@ -157,6 +173,9 @@ class EditLibraryGUI(QMainWindow):
         self.saved_seals_handler.saved_seals.pop(part_idx)
         self.saved_seals_handler.save_seals()
         self.close()
+    def EditStartingDiameter(self):
+        self.set_starting_position_gui = SetStartingPositionGUI(self.saved_seals_handler, self)
+        
   
     
     

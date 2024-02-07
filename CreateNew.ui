@@ -27,7 +27,7 @@
      <string>Save</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="set_starting_position_button">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -37,7 +37,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Set Starting Position</string>
+     <string>Set Starting Diameter</string>
     </property>
    </widget>
    <widget class="QWidget" name="formLayoutWidget">
@@ -112,7 +112,11 @@
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLineEdit" name="starting_diameter_line"/>
+      <widget class="QLineEdit" name="starting_diameter_line">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
