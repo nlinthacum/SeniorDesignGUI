@@ -26,5 +26,12 @@
     "die_name": "example_die red",
     "ending_diameter": "5.0",
     "notes": "example_notes"
+  },
+  {
+    "part_name": "Carson",
+    "material": "flesh",
+    "die_name": "s",
+    "ending_diameter": "15.00000005",
+    "notes": "ok"
   }
 ]

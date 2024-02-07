@@ -4,6 +4,9 @@ from PyQt5.QtWidgets import QApplication, QWidget, QListWidget, QListWidgetItem,
 from PyQt5.QtCore import QObject, pyqtSignal
 import json
 
+# User defined includes
+from socket_transport import *
+
 class HomePageGUI(QMainWindow):
 
     def __init__(self):
@@ -55,6 +58,9 @@ class HomePageGUI(QMainWindow):
             self.diameter_label.setText(str(part['ending_diameter']))
             self.notes_label.setText(part['notes'])
             self.part_idx = part_idx
+
+            # Call routine to send part to the PLC
+            SendSeal(15.05, 21.125)
         
     def RefreshDisplay(self):
         self.DisplayPart(self.part_idx)
