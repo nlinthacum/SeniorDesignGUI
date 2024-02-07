@@ -20,7 +20,7 @@
       <x>130</x>
       <y>290</y>
       <width>371</width>
-      <height>211</height>
+      <height>224</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout_2">
@@ -45,14 +45,14 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="4" column="0">
       <widget class="QLabel" name="label_5">
        <property name="text">
         <string>Ending Diameter (in):</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="0">
+     <item row="5" column="0">
       <widget class="QLabel" name="label_4">
        <property name="text">
         <string>Notes:</string>
@@ -72,11 +72,21 @@
      <item row="2" column="1">
       <widget class="QLineEdit" name="die_name_line"/>
      </item>
-     <item row="3" column="1">
+     <item row="4" column="1">
       <widget class="QLineEdit" name="ending_diameter_line"/>
      </item>
-     <item row="4" column="1">
+     <item row="5" column="1">
       <widget class="QLineEdit" name="notes_line"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>Starting Diameter (in):</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="starting_diameter_line"/>
      </item>
     </layout>
    </widget>

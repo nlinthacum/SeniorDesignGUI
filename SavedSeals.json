@@ -1,37 +1,26 @@
 [
   {
-    "part_name": "Example Seal 1",
-    "material": "Rubber",
-    "die_name": "example_die_1",
-    "ending_diameter": 5.0,
-    "notes": "example_notes_1"
+    "part_name": "gear_shaft",
+    "material": "steel",
+    "die_name": "die2",
+    "starting_diameter": "0.5",
+    "ending_diameter": "8.75",
+    "notes": "High precision required"
   },
   {
-    "part_name": "Example Seal 20",
-    "material": "Silicon",
-    "die_name": "example_die_2!",
-    "ending_diameter": "6.0",
-    "notes": "example_notes_2"
+    "part_name": "valve_body",
+    "material": "brass",
+    "die_name": "die4",
+    "starting_diameter": "1.8",
+    "ending_diameter": "10.2",
+    "notes": "Corrosion-resistant"
   },
   {
-    "part_name": "Example Seal 3",
-    "material": "Plastic",
-    "die_name": "example_die_3",
-    "ending_diameter": 4.5,
-    "notes": "example_notes_3"
-  },
-  {
-    "part_name": "Example Seal",
-    "material": "Rubber",
-    "die_name": "example_die red",
-    "ending_diameter": "5.0",
-    "notes": "example_notes"
-  },
-  {
-    "part_name": "Carson",
-    "material": "flesh",
-    "die_name": "s",
-    "ending_diameter": "15.00000005",
-    "notes": "ok"
+    "part_name": "connector_pin",
+    "material": "stainless_steel",
+    "die_name": "die5",
+    "starting_diameter": "1.2",
+    "ending_diameter": "6.5",
+    "notes": "High tensile strength"
   }
 ]
