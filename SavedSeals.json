@@ -54,5 +54,63 @@
     "starting_diameter": "2.88",
     "ending_diameter": "7.85",
     "notes": ""
+  },
+  {
+    "part_name": "",
+    "material": "",
+    "die_name": "",
+    "starting_diameter": "",
+    "ending_diameter": "",
+    "notes": ""
+  },
+  {
+    "part_name": "part xyz",
+    "material": "steel",
+    "die_name": "die 21",
+    "starting_diameter": "12",
+    "ending_diameter": "15.25",
+    "notes": ""
+  },
+  {
+    "part_name": "parrrt1",
+    "material": "copper",
+    "die_name": "",
+    "starting_diameter": "5.5",
+    "ending_diameter": "8.25",
+    "notes": ""
+  },
+  {
+    "part_name": "",
+    "material": "",
+    "die_name": "",
+    "starting_diameter": "",
+    "ending_diameter": "",
+    "notes": ""
+  },
+  {
+    "part_name": "",
+    "material": "",
+    "die_name": "",
+    "starting_diameter": "",
+    "ending_diameter": "",
+    "notes": ""
+  },
+  {
+    "part_name": "start",
+    "material": "",
+    "die_name": "",
+    "starting_diameter": "45",
+    "starting_measurement": -1,
+    "ending_diameter": "",
+    "notes": ""
+  },
+  {
+    "part_name": "start2",
+    "material": "",
+    "die_name": "",
+    "starting_diameter": "5",
+    "starting_measurement": "0.100000",
+    "ending_diameter": "",
+    "notes": ""
   }
 ]

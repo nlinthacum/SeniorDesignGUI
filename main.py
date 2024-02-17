@@ -63,7 +63,7 @@ class HomePageGUI(QMainWindow):
             self.part_idx = part_idx
 
             # Call routine to send part to the PLC
-            # SendSeal(15.05, 21.125)#commented out while developing without PLC
+            SendSeal(15.05, 21.125)#commented out while developing without PLC
         
     def RefreshDisplay(self):
         self.DisplayPart(self.part_idx)
@@ -71,6 +71,7 @@ class HomePageGUI(QMainWindow):
 
 
 class CreateNewGUI(QMainWindow):
+    starting_measurement = -1
     def __init__(self, saved_seals_handler):
         super(CreateNewGUI, self).__init__()
         uic.loadUi("CreateNew.ui", self)
@@ -81,12 +82,13 @@ class CreateNewGUI(QMainWindow):
         self.saved_seals_handler.load_seals()
      
     def CreateNewSaved(self):  
-        new_seal = Seal(part_name=str(self.part_name_line.text()), material=str(self.material_line.text()), die_name=str(self.die_name_line.text()), starting_diameter=str(self.starting_diameter_line.text()), ending_diameter=str(self.ending_diameter_line.text()), notes=str(self.notes_line.text()))
+        new_seal = Seal(part_name=str(self.part_name_line.text()), material=str(self.material_line.text()), die_name=str(self.die_name_line.text()), starting_diameter=str(self.starting_diameter_line.text()), starting_measurement= self.starting_measurement, ending_diameter=str(self.ending_diameter_line.text()), notes=str(self.notes_line.text()))
         self.saved_seals_handler.saved_seals.append(new_seal.to_dict())
         self.saved_seals_handler.save_seals()
         self.close()
     def SetStartingPosition(self):
          self.set_starting_position_gui = SetStartingPositionGUI(self.saved_seals_handler, self)
+         SendSetupNewPart()
         
 class SetStartingPositionGUI(QMainWindow):
     def __init__(self, saved_seals_handler, parent=None):
@@ -98,6 +100,10 @@ class SetStartingPositionGUI(QMainWindow):
         
     def SaveStartingPosition(self):
         self.parent().starting_diameter_line.setText(self.measured_starting_diameter_line.text())
+        byte_measurement = SendSavedStarting()
+        self.parent().starting_measurement = byte_measurement.decode("utf-8")
+        print(f"Received this message in GUI: {self.parent().starting_measurement}\n")
+
         self.close()
         
 
@@ -183,13 +189,15 @@ class EditLibraryGUI(QMainWindow):
     
 
 class Seal:
-    def __init__(self, part_name, material, die_name, starting_diameter, ending_diameter, notes):
+    def __init__(self, part_name, material, die_name, starting_diameter, starting_measurement, ending_diameter, notes):
         self.part_name = part_name
         self.material = material
         self.die_name = die_name
         self.starting_diameter = starting_diameter
+        self.starting_measurement = starting_measurement
         self.ending_diameter = ending_diameter
         self.notes = notes
+
 
     def to_dict(self):
         return {
@@ -197,6 +205,7 @@ class Seal:
             "material": self.material,
             "die_name": self.die_name,
             "starting_diameter": self.starting_diameter,
+            "starting_measurement": self.starting_measurement,
             "ending_diameter": self.ending_diameter,
             "notes": self.notes
         }
