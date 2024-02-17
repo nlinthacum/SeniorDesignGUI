@@ -112,5 +112,25 @@
     "starting_measurement": "0.100000",
     "ending_diameter": "",
     "notes": ""
+  },
+  {
+    "part_name": "",
+    "material": "",
+    "die_name": "",
+    "starting_diameter": "10.5",
+    "starting_measurement": "6.063865",
+    "ending_diameter": "12.5",
+    "ending_measurement": 4.063865,
+    "notes": ""
+  },
+  {
+    "part_name": "",
+    "material": "",
+    "die_name": "",
+    "starting_diameter": "9.1",
+    "starting_measurement": "6.892103",
+    "ending_diameter": "12.5",
+    "ending_measurement": "3.4921029999999993",
+    "notes": ""
   }
 ]
