@@ -14,10 +14,10 @@ def SendHelloWorld():
         data = s.recv(1024)
         print(f"Received {data}")
         time.sleep(3)
-def SendSeal(start_location, end_location):
+def SendSeal(start_location, end_location, speed):
      with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOST, PORT))
-        s.sendall(b"Start Location: " + str.encode(str(start_location)) + b" End Location: " + str.encode(str(end_location)) + b"\n")
+        s.sendall(b"Seal_Data Start Location: " + str.encode(str(start_location)) + b" End Location: " + str.encode(str(end_location)) + b" Speed: " + str.encode(str(speed)) + b"\n")
         data = s.recv(1024)
         print(f"Received {data}")
         time.sleep(1)

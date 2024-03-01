@@ -1,136 +1,46 @@
 [
   {
-    "part_name": "gear_shaft",
+    "part_name": "real small seal",
     "material": "steel",
-    "die_name": "die2",
-    "starting_diameter": "0.5",
-    "ending_diameter": "8.75",
-    "notes": "High precision required"
-  },
-  {
-    "part_name": "valve_body",
-    "material": "brass",
-    "die_name": "die4",
-    "starting_diameter": "1.8",
-    "ending_diameter": "10.2",
-    "notes": "Corrosion-resistant"
-  },
-  {
-    "part_name": "connector_pin",
-    "material": "stainless_steel",
-    "die_name": "die5",
-    "starting_diameter": "1.2",
-    "ending_diameter": "6.5",
-    "notes": "High tensile strength"
-  },
-  {
-    "part_name": "test start",
-    "material": "",
-    "die_name": "",
-    "starting_diameter": "1",
-    "ending_diameter": "",
+    "die_name": "none",
+    "starting_diameter": "4.14",
+    "starting_measurement": "14.07967",
+    "ending_diameter": "4.9",
+    "ending_measurement": "13.319669999999999",
+    "speed": "3",
     "notes": ""
   },
   {
-    "part_name": "part1",
+    "part_name": "real largest seal",
     "material": "steel",
-    "die_name": "",
-    "starting_diameter": "125",
-    "ending_diameter": "56",
+    "die_name": "none",
+    "starting_diameter": "9.75",
+    "starting_measurement": "8.544942",
+    "ending_diameter": "12.50",
+    "ending_measurement": "5.794942000000001",
+    "speed": "3",
     "notes": ""
   },
   {
-    "part_name": "oring 15",
-    "material": "steel",
-    "die_name": "die xyz",
-    "starting_diameter": "1.25",
-    "ending_diameter": "5.75",
-    "notes": "part for Foo"
-  },
-  {
-    "part_name": "test15",
-    "material": "copper",
-    "die_name": "die xyz",
-    "starting_diameter": "2.88",
-    "ending_diameter": "7.85",
+    "part_name": "real medium seal",
+    "material": "hard",
+    "die_name": "none",
+    "starting_diameter": "7.5",
+    "starting_measurement": "12.10233",
+    "ending_diameter": "9.5",
+    "ending_measurement": "10.10233",
+    "speed": "3",
     "notes": ""
   },
   {
-    "part_name": "",
-    "material": "",
-    "die_name": "",
-    "starting_diameter": "",
-    "ending_diameter": "",
-    "notes": ""
-  },
-  {
-    "part_name": "part xyz",
-    "material": "steel",
-    "die_name": "die 21",
-    "starting_diameter": "12",
-    "ending_diameter": "15.25",
-    "notes": ""
-  },
-  {
-    "part_name": "parrrt1",
-    "material": "copper",
-    "die_name": "",
-    "starting_diameter": "5.5",
-    "ending_diameter": "8.25",
-    "notes": ""
-  },
-  {
-    "part_name": "",
-    "material": "",
-    "die_name": "",
-    "starting_diameter": "",
-    "ending_diameter": "",
-    "notes": ""
-  },
-  {
-    "part_name": "",
-    "material": "",
-    "die_name": "",
-    "starting_diameter": "",
-    "ending_diameter": "",
-    "notes": ""
-  },
-  {
-    "part_name": "start",
-    "material": "",
-    "die_name": "",
-    "starting_diameter": "45",
-    "starting_measurement": -1,
-    "ending_diameter": "",
-    "notes": ""
-  },
-  {
-    "part_name": "start2",
-    "material": "",
-    "die_name": "",
-    "starting_diameter": "5",
-    "starting_measurement": "0.100000",
-    "ending_diameter": "",
-    "notes": ""
-  },
-  {
-    "part_name": "",
-    "material": "",
-    "die_name": "",
-    "starting_diameter": "10.5",
-    "starting_measurement": "6.063865",
-    "ending_diameter": "12.5",
-    "ending_measurement": 4.063865,
-    "notes": ""
-  },
-  {
-    "part_name": "",
-    "material": "",
-    "die_name": "",
-    "starting_diameter": "9.1",
-    "starting_measurement": "6.892103",
-    "ending_diameter": "12.5",
-    "ending_measurement": "3.4921029999999993",
-    "notes": ""
+    "part_name": "part 123",
+    "material": "air",
+    "die_name": "none",
+    "starting_diameter": "3",
+    "starting_measurement": "11.06726",
+    "ending_diameter": "5",
+    "ending_measurement": "9.06726",
+    "speed": "5",
+    "notes": "not a real seal"
   }
 ]

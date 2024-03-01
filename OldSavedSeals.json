@@ -1,0 +1,72 @@
+[
+  {
+    "part_name": "test part 1",
+    "material": "air",
+    "die_name": "original",
+    "starting_diameter": "5.0",
+    "starting_measurement": "11.21920",
+    "ending_diameter": "7.0",
+    "ending_measurement": "9.2192",
+    "notes": ""
+  },
+  {
+    "part_name": "small part 1",
+    "material": "air",
+    "die_name": "none",
+    "starting_diameter": "3.000",
+    "starting_measurement": "13.23384",
+    "ending_diameter": "3.5000",
+    "ending_measurement": "12.73384",
+    "notes": ""
+  },
+  {
+    "part_name": "part 52",
+    "material": "air",
+    "die_name": "none",
+    "starting_diameter": "4.845",
+    "starting_measurement": "11.38327",
+    "ending_diameter": "5.845",
+    "ending_measurement": "10.38327",
+    "notes": ""
+  },
+  {
+    "part_name": "real small seal",
+    "material": "",
+    "die_name": "",
+    "starting_diameter": "4.14",
+    "starting_measurement": "14.07967",
+    "ending_diameter": "4.9",
+    "ending_measurement": "13.319669999999999",
+    "notes": ""
+  },
+  {
+    "part_name": "real largest seal",
+    "material": "",
+    "die_name": "",
+    "starting_diameter": "9.75",
+    "starting_measurement": "8.544942",
+    "ending_diameter": "12.50",
+    "ending_measurement": "5.794942000000001",
+    "notes": ""
+  },
+  {
+    "part_name": "real medium seal",
+    "material": "hard",
+    "die_name": "",
+    "starting_diameter": "7.5",
+    "starting_measurement": "12.10233",
+    "ending_diameter": "9.5",
+    "ending_measurement": "10.10233",
+    "notes": ""
+  },
+  {
+    "part_name": "seal 123",
+    "material": "steel",
+    "die_name": "die 1",
+    "starting_diameter": "7.25",
+    "starting_measurement": "8.522803",
+    "ending_diameter": "9.75",
+    "ending_measurement": "6.022803",
+    "notes": "seal for company X"
+  }
+]
