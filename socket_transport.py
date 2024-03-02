@@ -40,6 +40,13 @@ def SendSavedStarting():
         time.sleep(1)
         return data
 
+def CloseConnection():
+     print("Sent close connection")
+     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((HOST, PORT))
+        s.sendall(b"\n")
+        s.close()
+    
 
     
 

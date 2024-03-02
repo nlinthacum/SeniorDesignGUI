@@ -107,8 +107,11 @@ class SetStartingPositionGUI(QMainWindow):
         byte_measurement = SendSavedStarting()
         self.parent().starting_measurement = byte_measurement.decode("utf-8")
         print(f"Received this message in GUI: {self.parent().starting_measurement}\n")
-
         self.close()
+    
+    def closeEvent(self, event):
+        CloseConnection()
+        event.accept() #close the window
         
 
 # LoadFromLibraryList is name of list
