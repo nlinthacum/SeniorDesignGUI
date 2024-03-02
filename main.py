@@ -4,8 +4,10 @@ from PyQt5.QtWidgets import QApplication, QWidget, QListWidget, QListWidgetItem,
 from PyQt5.QtCore import QObject, pyqtSignal
 import json
 
+
 # User defined includes
 from socket_transport import *
+import PasswordUtil
 
 class HomePageGUI(QMainWindow):
 
@@ -41,7 +43,7 @@ class HomePageGUI(QMainWindow):
     def OpenLoadLibrary(self):
         self.load_library_gui = LoadFromLibraryGUI(self.saved_seals_handler, self)
     def OpenEditLibrary(self):
-        self.edit_library_gui = EditLibraryGUI(self.saved_seals_handler, self)
+        self.edit_library_gui = EnterPasswordGUI(self.saved_seals_handler, self)
         
 
     def DisplayPart(self, part_idx):
@@ -196,7 +198,27 @@ class EditLibraryGUI(QMainWindow):
         SendSetupNewPart()
         
   
-    
+class EnterPasswordGUI(QMainWindow):
+    def __init__(self, saved_seals_handler,parent=None):
+        super(EnterPasswordGUI, self).__init__(parent)
+        uic.loadUi("EnterPassword.ui", self)
+        self.show()
+        self.saved_seals_handler = saved_seals_handler
+        self.enter_button.clicked.connect(self.PasswordEnter)
+        self.password_label.setText("") 
+     
+    def PasswordEnter(self):  
+        entered_password = str(self.password_line.text())
+        if (PasswordUtil.CheckPassword(entered_password)):
+            self.edit_library_gui = EditLibraryGUI(self.saved_seals_handler, self)
+            self.close()
+        else:
+            self.password_label.setText("Incorrect Password!") 
+
+
+
+       
+
     
         
     

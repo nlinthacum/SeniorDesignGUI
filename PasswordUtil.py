@@ -8,12 +8,15 @@ def CreatePassword(password):
         json.dump(hashed_password.decode(), f)
 
 
+# Returns true if the password is correct, false otherwise
 def CheckPassword(password):
     f = open('passwd_store.json', 'r')
     hashed_password = json.load(f)
 
     if bcrypt.checkpw(password.encode(), hashed_password.encode()):
         print("Password is correct")
+        return True
     else:
         print("Password is incorrect")
+        return False
    
