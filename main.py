@@ -113,7 +113,7 @@ class SetStartingPositionGUI(QMainWindow):
         self.close()
     
     def closeEvent(self, event):
-        CloseConnection()
+        # CloseConnection()
         event.accept() #close the window
         
 
@@ -273,6 +273,7 @@ class SavedSeals(QObject):
 
 
 def main():
+    InitializeConnection()
     app = QApplication([])
     window = HomePageGUI()
     app.exec_()
