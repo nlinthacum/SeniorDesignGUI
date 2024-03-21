@@ -70,7 +70,7 @@ class HomePageGUI(QMainWindow):
 
             # Call routine to send part to the PLC
             SendSeal(part['starting_measurement'], part['ending_measurement'], part['speed'])#commented out while developing without PLC
-        
+
     def RefreshDisplay(self):
         self.DisplayPart(self.part_idx)
 
@@ -215,14 +215,6 @@ class EnterPasswordGUI(QMainWindow):
             self.close()
         else:
             self.password_label.setText("Incorrect Password!") 
-
-
-
-       
-
-    
-        
-    
 
 class Seal:
     def __init__(self, part_name, material, die_name, starting_diameter, starting_measurement, ending_diameter, ending_measurement, speed, notes):

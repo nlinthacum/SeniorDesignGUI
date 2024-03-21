@@ -21,6 +21,7 @@ def SendSeal(start_location, end_location, speed):
         data = s.recv(1024)
         print(f"Received {data}")
         time.sleep(1)
+        # CloseConnection()
 
 def SendSetupNewPart():
      with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -30,11 +31,19 @@ def SendSetupNewPart():
         print(f"Received {data}")
         time.sleep(1)
         
-
 def SendSavedStarting():
      with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOST, PORT))
         s.sendall(b"saved_starting\n")
+        data = s.recv(1024)
+        print(f"Received {data}")
+        time.sleep(1)
+        return data
+
+def ListenForLogging():
+     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((HOST, PORT))
+        # s.sendall(b"s\n")
         data = s.recv(1024)
         print(f"Received {data}")
         time.sleep(1)
