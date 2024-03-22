@@ -21,6 +21,7 @@ def InitializeConnection():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     time.sleep(0.5)  # Wait for a short moment (if needed)
     s.connect((HOST, PORT))  # Connect to the host and port
+    SendBreak()
      
 def SendHelloWorld():
         s.sendall(b"Hello, world\n")
@@ -30,6 +31,7 @@ def SendHelloWorld():
         time.sleep(3)
 
 def SendSeal(start_location, end_location, speed):
+        SendBreak()
         s.sendall(b"Seal_Data Start Location: " + str.encode(str(start_location)) + b" End Location: " + str.encode(str(end_location)) + b" Speed: " + str.encode(str(speed)) + b"\n")
         # data = s.recv(1024)
         # print(f"Received {data}")
@@ -37,6 +39,7 @@ def SendSeal(start_location, end_location, speed):
         # CloseConnection()
 
 def SendSetupNewPart():
+        SendBreak()
         s.sendall(b"setup_new_part\n")
         # data = s.recv(1024)
         # print(f"Received {data}")
@@ -49,12 +52,31 @@ def SendSavedStarting():
         time.sleep(1)
         return data
 
-def SendBlank():
-        s.sendall(b"\n")
+def SendBreak():
+        s.sendall(b"BREAK\n")
+        # data = s.recv(1024)
+        # print(f"Received {data}")
+        # time.sleep(1)
+        # return data
+
+def ReceiveMessage():
         data = s.recv(1024)
         print(f"Received {data}")
         time.sleep(1)
         return data
+
+def Heartbeat():
+        while(1):
+                try:
+                        s.sendall(b"heartbeat\n")
+                        print("Sent Heartbeat\n")
+                except:
+                      print("Heartbeat failed.\n")
+                      InitializeConnection()
+                      
+
+
+                time.sleep(5)
 
 def CloseConnection():
      print("Sent close connection")

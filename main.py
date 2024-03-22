@@ -4,6 +4,7 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QWidget, QListWidget, QListWidgetItem, QVBoxLayout
 from PyQt5.QtCore import QObject, pyqtSignal
 import json
+import threading, time
 
 
 # User defined includes
@@ -268,14 +269,16 @@ class SavedSeals(QObject):
             json.dump(self.saved_seals, f, indent=2)
         self.seals_updated.emit()  # Emit the signal when the list is updated
 
-    
-
 
 
 def main():
     InitializeConnection()
     app = QApplication([])
     window = HomePageGUI()
+
+    heartbeat_thread = threading.Thread(target=Heartbeat)
+    heartbeat_thread.start()
+
     app.exec_()
 
 
