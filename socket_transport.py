@@ -2,7 +2,7 @@
 
 from os import wait
 import socket
-import time
+import time, multiprocessing
 
 HOST = "192.168.1.177"  # The server's hostname or IP address
 PORT = 80  # The port used by the server
@@ -22,6 +22,10 @@ def InitializeConnection():
     time.sleep(0.5)  # Wait for a short moment (if needed)
     s.connect((HOST, PORT))  # Connect to the host and port
     SendBreak()
+
+    global socket_receive_process
+    socket_receive_process = multiprocessing.Process(target=ReceiveMessage, args=())
+    socket_receive_process.start()
      
 def SendHelloWorld():
         s.sendall(b"Hello, world\n")
@@ -46,10 +50,19 @@ def SendSetupNewPart():
         time.sleep(1)
         
 def SendSavedStarting():
+
+        global socket_receive_process
+        socket_receive_process.terminate()
+        socket_receive_process.join()  # Wait for the process to terminate
+
+
         s.sendall(b"saved_starting\n")
         data = s.recv(1024)
-        print(f"Received {data}")
+        # print(f"Received {data}")
         time.sleep(1)
+
+        socket_receive_process = multiprocessing.Process(target=ReceiveMessage, args=())
+        socket_receive_process.start()
         return data
 
 def SendBreak():
@@ -60,10 +73,12 @@ def SendBreak():
         # return data
 
 def ReceiveMessage():
+        print("Starting receive message process\n")
         while(1):
                 data = s.recv(1024)
                 print(f"Received {data}")
                 time.sleep(1)
+        print("Ending receive message process\n")
         return data
 
 def Heartbeat(kill_sig):

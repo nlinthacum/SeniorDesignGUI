@@ -290,6 +290,11 @@ class SavedSeals(QObject):
 heartbeat_kill_sig = multiprocessing.Value('i', 0)
 
 
+
+
+heartbeat_kill_sig.value = 0 
+heartbeat_process = Process(target=Heartbeat, args=(heartbeat_kill_sig,))
+
 def main():
     InitializeConnection()
     app = QApplication([])
@@ -298,6 +303,11 @@ def main():
     heartbeat_kill_sig.value = 0 
     heartbeat_process = Process(target=Heartbeat, args=(heartbeat_kill_sig,))
     heartbeat_process.start()
+
+    
+   
+
+
 
    
 
