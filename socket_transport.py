@@ -7,7 +7,7 @@ import time
 HOST = "192.168.1.177"  # The server's hostname or IP address
 PORT = 80  # The port used by the server
 
-s = None
+s = None #global variable used for the connection
 
 def InitializeConnection():
     global s  # Access the global variable s
@@ -60,23 +60,25 @@ def SendBreak():
         # return data
 
 def ReceiveMessage():
-        data = s.recv(1024)
-        print(f"Received {data}")
-        time.sleep(1)
+        while(1):
+                data = s.recv(1024)
+                print(f"Received {data}")
+                time.sleep(1)
         return data
 
-def Heartbeat():
-        while(1):
+def Heartbeat(kill_sig):
+        while(not kill_sig.value):
                 try:
                         s.sendall(b"heartbeat\n")
                         print("Sent Heartbeat\n")
                 except:
-                      print("Heartbeat failed.\n")
-                      InitializeConnection()
+                        print("Heartbeat failed.\n")
+                        InitializeConnection()
                       
 
-
                 time.sleep(5)
+        print("Ending Hearbeat process\n")
+        return
 
 def CloseConnection():
      print("Sent close connection")

@@ -4,12 +4,17 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QWidget, QListWidget, QListWidgetItem, QVBoxLayout
 from PyQt5.QtCore import QObject, pyqtSignal
 import json
-import threading, time
-
+import threading, time, os, signal, multiprocessing
+from multiprocessing import Process, Value
 
 # User defined includes
 from socket_transport import *
 import PasswordUtil
+
+
+
+
+
 
 class HomePageGUI(QMainWindow):
 
@@ -46,7 +51,6 @@ class HomePageGUI(QMainWindow):
         self.load_library_gui = LoadFromLibraryGUI(self.saved_seals_handler, self)
     def OpenEditLibrary(self):
         self.edit_library_gui = EnterPasswordGUI(self.saved_seals_handler, self)
-        
 
     def DisplayPart(self, part_idx):
         if (part_idx <0):
@@ -74,6 +78,19 @@ class HomePageGUI(QMainWindow):
 
     def RefreshDisplay(self):
         self.DisplayPart(self.part_idx)
+    
+    def closeEvent(self, event):
+        # Emit a signal to stop the heartbeat thread
+        # heartbeat_thread.join() #stops the heartbeat thread
+        # pid = p.pid
+        # os.kill(heartbeat_thread, signal.SIGINT)
+        
+        # for child in active:
+        #     child.terminate()
+        global heartbeat_kill_sig
+        heartbeat_kill_sig.value = 1
+        event.accept()
+        
 
 
 
@@ -269,17 +286,23 @@ class SavedSeals(QObject):
             json.dump(self.saved_seals, f, indent=2)
         self.seals_updated.emit()  # Emit the signal when the list is updated
 
+# global heartbeat_kill_sig 
+heartbeat_kill_sig = multiprocessing.Value('i', 0)
 
 
 def main():
     InitializeConnection()
     app = QApplication([])
     window = HomePageGUI()
+    
+    heartbeat_kill_sig.value = 0 
+    heartbeat_process = Process(target=Heartbeat, args=(heartbeat_kill_sig,))
+    heartbeat_process.start()
 
-    heartbeat_thread = threading.Thread(target=Heartbeat)
-    heartbeat_thread.start()
+   
 
     app.exec_()
+    
 
 
 if __name__ == '__main__':
