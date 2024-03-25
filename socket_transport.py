@@ -3,11 +3,15 @@
 from os import wait
 import socket
 import time, multiprocessing
+from data_logging import append_distances_to_csv #my logging functions
+from seals_implementation import *
+# from main import SavedSeals
 
 HOST = "192.168.1.177"  # The server's hostname or IP address
 PORT = 80  # The port used by the server
 
 s = None #global variable used for the connection
+seal_on_PLC = -1
 
 def InitializeConnection():
     global s  # Access the global variable s
@@ -34,12 +38,13 @@ def SendHelloWorld():
         print(f"Received {data}")
         time.sleep(3)
 
-def SendSeal(start_location, end_location, speed):
+def SendSeal(start_location, end_location, speed, seal_idx):
         SendBreak()
         s.sendall(b"Seal_Data Start Location: " + str.encode(str(start_location)) + b" End Location: " + str.encode(str(end_location)) + b" Speed: " + str.encode(str(speed)) + b"\n")
         # data = s.recv(1024)
         # print(f"Received {data}")
         time.sleep(1)
+        seal_on_PLC = seal_idx
         # CloseConnection()
 
 def SendSetupNewPart():
@@ -77,7 +82,19 @@ def ReceiveMessage():
         while(1):
                 data = s.recv(1024)
                 print(f"Received {data}")
+
+                if data.startswith(b"LOG"):
+                        # Start a new process for logging routine
+                        part_idx = seal_on_PLC; #will need to change this
+                        saved_seals_handler = SavedSeals()
+                        saved_seals_handler.load_seals()
+                        part = saved_seals_handler.saved_seals[part_idx]
+                        logging_process = multiprocessing.Process(target=append_distances_to_csv, args=(part, data))
+                        logging_process.start()
+
+
                 time.sleep(1)
+                
         print("Ending receive message process\n")
         return data
 
