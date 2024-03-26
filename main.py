@@ -4,11 +4,13 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QWidget, QListWidget, QListWidgetItem, QVBoxLayout
 from PyQt5.QtCore import QObject, pyqtSignal
 import json
-
+import threading, time, os, signal, multiprocessing
+from multiprocessing import Process, Value
 
 # User defined includes
 from socket_transport import *
 import PasswordUtil
+from seals_implementation import *
 
 class HomePageGUI(QMainWindow):
 
@@ -45,7 +47,6 @@ class HomePageGUI(QMainWindow):
         self.load_library_gui = LoadFromLibraryGUI(self.saved_seals_handler, self)
     def OpenEditLibrary(self):
         self.edit_library_gui = EnterPasswordGUI(self.saved_seals_handler, self)
-        
 
     def DisplayPart(self, part_idx):
         if (part_idx <0):
@@ -69,10 +70,23 @@ class HomePageGUI(QMainWindow):
             self.part_idx = part_idx
 
             # Call routine to send part to the PLC
-            SendSeal(part['starting_measurement'], part['ending_measurement'], part['speed'])#commented out while developing without PLC
+            SendSeal(part['starting_measurement'], part['ending_measurement'], part['speed'], part_idx)#commented out while developing without PLC
 
     def RefreshDisplay(self):
         self.DisplayPart(self.part_idx)
+    
+    def closeEvent(self, event):
+        # Emit a signal to stop the heartbeat thread
+        # heartbeat_thread.join() #stops the heartbeat thread
+        # pid = p.pid
+        # os.kill(heartbeat_thread, signal.SIGINT)
+        
+        # for child in active:
+        #     child.terminate()
+        global heartbeat_kill_sig
+        heartbeat_kill_sig.value = 1
+        event.accept()
+        
 
 
 
@@ -113,7 +127,7 @@ class SetStartingPositionGUI(QMainWindow):
         self.close()
     
     def closeEvent(self, event):
-        CloseConnection()
+        # CloseConnection()
         event.accept() #close the window
         
 
@@ -216,66 +230,79 @@ class EnterPasswordGUI(QMainWindow):
         else:
             self.password_label.setText("Incorrect Password!") 
 
-class Seal:
-    def __init__(self, part_name, material, die_name, starting_diameter, starting_measurement, ending_diameter, ending_measurement, speed, notes):
-        self.part_name = part_name
-        self.material = material
-        self.die_name = die_name
-        self.starting_diameter = starting_diameter
-        self.starting_measurement = starting_measurement
-        self.ending_diameter = ending_diameter
-        self.ending_measurement = ending_measurement
-        self.speed = speed
-        self.notes = notes
+# class Seal:
+#     def __init__(self, part_name, material, die_name, starting_diameter, starting_measurement, ending_diameter, ending_measurement, speed, notes):
+#         self.part_name = part_name
+#         self.material = material
+#         self.die_name = die_name
+#         self.starting_diameter = starting_diameter
+#         self.starting_measurement = starting_measurement
+#         self.ending_diameter = ending_diameter
+#         self.ending_measurement = ending_measurement
+#         self.speed = speed
+#         self.notes = notes
 
 
-    def to_dict(self):
-        return {
-            "part_name": self.part_name,
-            "material": self.material,
-            "die_name": self.die_name,
-            "starting_diameter": self.starting_diameter,
-            "starting_measurement": self.starting_measurement,
-            "ending_diameter": self.ending_diameter,
-            "ending_measurement": self.ending_measurement,
-            "speed": self.speed,
-            "notes": self.notes
-        }
+#     def to_dict(self):
+#         return {
+#             "part_name": self.part_name,
+#             "material": self.material,
+#             "die_name": self.die_name,
+#             "starting_diameter": self.starting_diameter,
+#             "starting_measurement": self.starting_measurement,
+#             "ending_diameter": self.ending_diameter,
+#             "ending_measurement": self.ending_measurement,
+#             "speed": self.speed,
+#             "notes": self.notes
+#         }
 
-    def __str__(self):
-        return f"Seal - Part Name: {self.part_name}, Material: {self.material}, Ending Distance: {self.ending_distance}"
+#     def __str__(self):
+#         return f"Seal - Part Name: {self.part_name}, Material: {self.material}, Ending Distance: {self.ending_distance}"
 
-class SavedSeals(QObject):
-    seals_updated = pyqtSignal()
+# class SavedSeals(QObject):
+#     seals_updated = pyqtSignal()
     
-    def __init__(self):
-        super().__init__()
-        self.saved_seals = list()
+#     def __init__(self):
+#         super().__init__()
+#         self.saved_seals = list()
 
-    def load_seals(self):
-        try:
-            with open("SavedSeals.json", 'r') as f:
-                data = json.load(f)
-                if isinstance(data, list):
-                    self.saved_seals = data
-                else:
-                    print("Invalid data format in SavedSeals.json. Expected a list.")
-        except FileNotFoundError:
-            print("SavedSeals.json not found. Creating a new file.")
+#     def load_seals(self):
+#         try:
+#             with open("SavedSeals.json", 'r') as f:
+#                 data = json.load(f)
+#                 if isinstance(data, list):
+#                     self.saved_seals = data
+#                 else:
+#                     print("Invalid data format in SavedSeals.json. Expected a list.")
+#         except FileNotFoundError:
+#             print("SavedSeals.json not found. Creating a new file.")
 
-    def save_seals(self):
-        with open("SavedSeals.json", 'w') as f:
-            json.dump(self.saved_seals, f, indent=2)
-        self.seals_updated.emit()  # Emit the signal when the list is updated
+#     def save_seals(self):
+#         with open("SavedSeals.json", 'w') as f:
+#             json.dump(self.saved_seals, f, indent=2)
+#         self.seals_updated.emit()  # Emit the signal when the list is updated
 
-    
+# global heartbeat_kill_sig 
+heartbeat_kill_sig = multiprocessing.Value('i', 0)
 
 
+
+
+heartbeat_kill_sig.value = 0 
+heartbeat_process = Process(target=Heartbeat, args=(heartbeat_kill_sig,))
 
 def main():
+    InitializeConnection()
     app = QApplication([])
     window = HomePageGUI()
+    
+    heartbeat_kill_sig.value = 0 
+    heartbeat_process = Process(target=Heartbeat, args=(heartbeat_kill_sig,))
+    heartbeat_process.start()
+
+
     app.exec_()
+    
 
 
 if __name__ == '__main__':
