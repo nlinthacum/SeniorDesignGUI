@@ -56,12 +56,23 @@
   },
   {
     "part_name": "test really small",
-    "material": "",
-    "die_name": "",
+    "material": "air",
+    "die_name": "no die",
     "starting_diameter": "2",
     "starting_measurement": "12.09475",
     "ending_diameter": "2.1",
     "ending_measurement": "11.99475",
+    "speed": "3",
+    "notes": "notes about the seal"
+  },
+  {
+    "part_name": "test 2",
+    "material": "none",
+    "die_name": "none",
+    "starting_diameter": "1",
+    "starting_measurement": "12.10263",
+    "ending_diameter": "1.25",
+    "ending_measurement": "11.85263",
     "speed": "3",
     "notes": ""
   }

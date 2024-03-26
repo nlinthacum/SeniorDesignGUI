@@ -11,7 +11,7 @@ HOST = "192.168.1.177"  # The server's hostname or IP address
 PORT = 80  # The port used by the server
 
 s = None #global variable used for the connection
-seal_on_PLC = -1
+
 
 def InitializeConnection():
     global s  # Access the global variable s
@@ -28,7 +28,11 @@ def InitializeConnection():
     SendBreak()
 
     global socket_receive_process
-    socket_receive_process = multiprocessing.Process(target=ReceiveMessage, args=())
+    global parent_conn
+    global child_conn
+    parent_conn, child_conn = multiprocessing.Pipe()
+
+    socket_receive_process = multiprocessing.Process(target=ReceiveMessage, args=(child_conn,))
     socket_receive_process.start()
      
 def SendHelloWorld():
@@ -40,11 +44,13 @@ def SendHelloWorld():
 
 def SendSeal(start_location, end_location, speed, seal_idx):
         SendBreak()
+        
         s.sendall(b"Seal_Data Start Location: " + str.encode(str(start_location)) + b" End Location: " + str.encode(str(end_location)) + b" Speed: " + str.encode(str(speed)) + b"\n")
         # data = s.recv(1024)
         # print(f"Received {data}")
         time.sleep(1)
-        seal_on_PLC = seal_idx
+        
+        parent_conn.send(seal_idx)
         # CloseConnection()
 
 def SendSetupNewPart():
@@ -66,7 +72,7 @@ def SendSavedStarting():
         # print(f"Received {data}")
         time.sleep(1)
 
-        socket_receive_process = multiprocessing.Process(target=ReceiveMessage, args=())
+        socket_receive_process = multiprocessing.Process(target=ReceiveMessage, args=(child_conn,))
         socket_receive_process.start()
         return data
 
@@ -77,20 +83,51 @@ def SendBreak():
         # time.sleep(1)
         # return data
 
-def ReceiveMessage():
+def ReceiveMessage(conn):
         print("Starting receive message process\n")
+        start_measurement = -1
+        end_measurement = -1
         while(1):
                 data = s.recv(1024)
                 print(f"Received {data}")
 
                 if data.startswith(b"LOG"):
-                        # Start a new process for logging routine
-                        part_idx = seal_on_PLC; #will need to change this
-                        saved_seals_handler = SavedSeals()
-                        saved_seals_handler.load_seals()
-                        part = saved_seals_handler.saved_seals[part_idx]
-                        logging_process = multiprocessing.Process(target=append_distances_to_csv, args=(part, data))
-                        logging_process.start()
+                        # Convert bytes to string
+                        data_str = data.decode('utf-8')
+                        parts = data_str.split(':')
+                        print("Parts:" + str(parts))
+                        if "START" in parts:
+                                print("Start in parts")
+                                # Extract CODE and number for START message
+                                start_index = parts.index('START')
+                                start_measurement = float(parts[start_index + 1])
+
+                        elif "END" in parts:
+                                # Extract CODE and number for END message
+                                end_index = parts.index('END')
+                                end_measurement = float(parts[end_index + 1])
+                                stretch_duration = float(parts[end_index + 2])
+                                #ensure getting last sent value
+                                while conn.poll():
+                                        seal_on_PLC = conn.recv() #no longer using the global seal_on_PLC
+                                print("IN end, seal on plc has value: " + str(seal_on_PLC))
+                                
+                                if (start_measurement == -1):
+                                       print("ERROR: END measurment received without start measurement. Not logging this stretch\n")
+                                
+                                elif (seal_on_PLC == -1):
+                                       print("ERROR: Do not know seal on PLC. Reload seal to continue logging")
+                                else:
+                                       # Start a new process for logging routine
+                                        part_idx = seal_on_PLC; #will need to change this
+                                        print("Seal on PLC value:" + str(seal_on_PLC))
+                                        saved_seals_handler = SavedSeals()
+                                        saved_seals_handler.load_seals()
+                                        part = saved_seals_handler.saved_seals[part_idx]
+                                        logging_process = multiprocessing.Process(target=append_distances_to_csv, args=(part, start_measurement, end_measurement, stretch_duration))
+                                        logging_process.start()
+                        else:
+                                print("Start nor End in parts")
 
 
                 time.sleep(1)

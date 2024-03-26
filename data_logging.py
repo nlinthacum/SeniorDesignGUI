@@ -4,6 +4,7 @@ from os import wait
 import socket
 import time
 import csv
+import datetime
 from seals_implementation import *
 
 csv_filename = 'stretcher_log.csv'
@@ -11,14 +12,19 @@ csv_filename = 'stretcher_log.csv'
 def logging_routine(data):
     print("in the logging routine with data: " + str(data))
 
-def append_distances_to_csv(part, distance):
-    # Define the headers for the CSV file
+def append_distances_to_csv(part, start_measurement, end_measurement, stretch_duration):
+
     name = part['part_name']
     print("This part name: " + str(name))
-    headers = ['Seal Name', 'Start Distance', 'End Distance']
+
+    # Define the headers for the CSV file
+    headers = ['Seal Name', 'Material', 'Speed (in/min)', 'Timestamp', 'Stretch Duration (s)', 'Start Target Measurement (in)', 'End Target Measurement (in)', \
+               'Start Measurement (in)', 'End Measurement (in)']
 
     # Prepare the data to be written to the CSV file
-    data = [distance]
+    # Note: part['starting_measurement'] and part['ending_measurement'] refer to the target positions
+    data = [part['part_name'], part['material'], part['speed'], datetime.datetime.now(), stretch_duration, part['starting_measurement'], \
+            part['ending_measurement'], start_measurement, end_measurement]
 
     # Check if the file already exists or not
     file_exists = True
