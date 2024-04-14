@@ -1,79 +1,35 @@
 [
   {
-    "part_name": "real small seal",
-    "material": "steel",
-    "die_name": "none",
-    "starting_diameter": "4.14",
-    "starting_measurement": "14.07967",
-    "ending_diameter": "4.9",
-    "ending_measurement": "13.319669999999999",
-    "speed": "3",
-    "notes": ""
-  },
-  {
-    "part_name": "real largest seal",
-    "material": "steel",
-    "die_name": "none",
-    "starting_diameter": "9.75",
-    "starting_measurement": "8.544942",
-    "ending_diameter": "12.50",
-    "ending_measurement": "5.794942000000001",
-    "speed": "3",
-    "notes": ""
-  },
-  {
-    "part_name": "real medium seal",
-    "material": "hard",
-    "die_name": "none",
-    "starting_diameter": "7.5",
-    "starting_measurement": "12.10233",
-    "ending_diameter": "9.5",
-    "ending_measurement": "10.10233",
-    "speed": "3",
-    "notes": ""
-  },
-  {
-    "part_name": "part 123",
+    "part_name": "test 1",
     "material": "air",
     "die_name": "none",
-    "starting_diameter": "3",
-    "starting_measurement": "11.06726",
-    "ending_diameter": "5",
-    "ending_measurement": "9.06726",
-    "speed": "5",
-    "notes": "not a real seal"
-  },
-  {
-    "part_name": "test",
-    "material": "",
-    "die_name": "",
-    "starting_diameter": "2",
-    "starting_measurement": "12.10506",
+    "starting_diameter": "2.857",
+    "starting_measurement": "8.074565",
     "ending_diameter": "4",
-    "ending_measurement": "10.10506",
-    "speed": "",
+    "ending_measurement": "9.217565",
+    "speed": "6",
     "notes": ""
   },
   {
-    "part_name": "test really small",
-    "material": "air",
-    "die_name": "no die",
-    "starting_diameter": "2",
-    "starting_measurement": "12.09475",
-    "ending_diameter": "2.1",
-    "ending_measurement": "11.99475",
-    "speed": "3",
-    "notes": "notes about the seal"
-  },
-  {
-    "part_name": "test 2",
+    "part_name": "test stop",
     "material": "none",
     "die_name": "none",
-    "starting_diameter": "1",
-    "starting_measurement": "12.10263",
-    "ending_diameter": "1.25",
-    "ending_measurement": "11.85263",
-    "speed": "3",
+    "starting_diameter": "1.218",
+    "starting_measurement": "6.430522",
+    "ending_diameter": "1.5",
+    "ending_measurement": "6.712522",
+    "speed": "6",
+    "notes": ""
+  },
+  {
+    "part_name": "really small",
+    "material": "none",
+    "die_name": "none",
+    "starting_diameter": "0.17",
+    "starting_measurement": "5.337222",
+    "ending_diameter": "1",
+    "ending_measurement": "6.167222",
+    "speed": "6",
     "notes": ""
   }
 ]

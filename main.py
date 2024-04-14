@@ -102,7 +102,7 @@ class CreateNewGUI(QMainWindow):
         self.saved_seals_handler.load_seals()
      
     def CreateNewSaved(self):  
-        ending_measurement = float(self.starting_measurement) - (float(self.ending_diameter_line.text()) - float(self.starting_diameter_line.text()))
+        ending_measurement = float(self.starting_measurement) + (float(self.ending_diameter_line.text()) - float(self.starting_diameter_line.text()))
         new_seal = Seal(part_name=str(self.part_name_line.text()), material=str(self.material_line.text()), die_name=str(self.die_name_line.text()), starting_diameter=str(self.starting_diameter_line.text()), starting_measurement= self.starting_measurement, ending_diameter=str(self.ending_diameter_line.text()), ending_measurement=str(ending_measurement), speed=str(self.speed_line.text()),notes=str(self.notes_line.text()))
         self.saved_seals_handler.saved_seals.append(new_seal.to_dict())
         self.saved_seals_handler.save_seals()
@@ -197,7 +197,7 @@ class EditLibraryGUI(QMainWindow):
 
     def EditSaved(self):
         part_idx = self.LoadFromLibraryList.currentRow()
-        ending_measurement = float(self.starting_measurement) - (float(self.ending_diameter_line.text()) - float(self.starting_diameter_line.text()))
+        ending_measurement = float(self.starting_measurement) + (float(self.ending_diameter_line.text()) - float(self.starting_diameter_line.text()))
         new_seal = Seal(part_name=str(self.part_name_line.text()), material=str(self.material_line.text()), die_name=str(self.die_name_line.text()), starting_diameter=str(self.starting_diameter_line.text()), starting_measurement= self.starting_measurement, ending_diameter=str(self.ending_diameter_line.text()), ending_measurement=str(ending_measurement), speed=str(self.speed_line.text()), notes=str(self.notes_line.text()))
         self.saved_seals_handler.saved_seals[part_idx] = new_seal.to_dict()
         self.saved_seals_handler.save_seals()
