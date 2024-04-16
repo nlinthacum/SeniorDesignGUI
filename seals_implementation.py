@@ -1,4 +1,6 @@
 #implementation of Seal class and SavedSeals class as used in the GUI
+# seals are saved in JSON format in the SavedSeals.json file
+
 #!/usr/bin/env python
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QObject, pyqtSignal
