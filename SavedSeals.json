@@ -7,7 +7,7 @@
     "starting_measurement": "8.074565",
     "ending_diameter": "4",
     "ending_measurement": "9.217565",
-    "speed": "6",
+    "speed": "7",
     "notes": ""
   },
   {
@@ -29,6 +29,39 @@
     "starting_measurement": "5.337222",
     "ending_diameter": "1",
     "ending_measurement": "6.167222",
+    "speed": "6",
+    "notes": ""
+  },
+  {
+    "part_name": "test 2",
+    "material": "air",
+    "die_name": "none",
+    "starting_diameter": "8.25",
+    "starting_measurement": "9.468105",
+    "ending_diameter": "10.25",
+    "ending_measurement": "11.468105",
+    "speed": "6",
+    "notes": ""
+  },
+  {
+    "part_name": "test 3",
+    "material": "air",
+    "die_name": "none",
+    "starting_diameter": "5.9",
+    "starting_measurement": "7.055568",
+    "ending_diameter": "8",
+    "ending_measurement": "9.155567999999999",
+    "speed": "6",
+    "notes": ""
+  },
+  {
+    "part_name": "small silver",
+    "material": "aluminum",
+    "die_name": "test",
+    "starting_diameter": "3.09",
+    "starting_measurement": "5.678101",
+    "ending_diameter": "4.00",
+    "ending_measurement": "6.588101",
     "speed": "6",
     "notes": ""
   }
