@@ -1,3 +1,7 @@
+# Author: Nick Linthacum
+# Date: Spring 2024
+# Contact: 408-981-4670; nick.linthacum@gmail.com
+
 #implementation of Seal class and SavedSeals class as used in the GUI
 # seals are saved in JSON format in the SavedSeals.json file
 

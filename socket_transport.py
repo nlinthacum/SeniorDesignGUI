@@ -1,3 +1,6 @@
+# Author: Nick Linthacum
+# Date: Spring 2024
+# Contact: 408-981-4670; nick.linthacum@gmail.com
 # Code performing the TCP communication between raspberry pi and PLC
 
 from os import wait

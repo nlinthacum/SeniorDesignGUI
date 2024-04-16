@@ -1,3 +1,7 @@
+# Author: Nick Linthacum
+# Date: Spring 2024
+# Contact: 408-981-4670; nick.linthacum@gmail.com
+
 # Code for creating, salting, and hashing a passowrd.
 # Used in creating the password for editing seals
 
