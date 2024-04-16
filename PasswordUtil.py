@@ -1,3 +1,6 @@
+# Code for creating, salting, and hashing a passowrd.
+# Used in creating the password for editing seals
+
 import bcrypt
 import json
 

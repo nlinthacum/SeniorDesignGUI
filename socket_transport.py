@@ -1,4 +1,4 @@
-# echo-client.py
+# Code performing the TCP communication between raspberry pi and PLC
 
 from os import wait
 import socket
@@ -12,7 +12,7 @@ PORT = 80  # The port used by the server
 
 s = None #global variable used for the connection
 
-
+# Initialize the TCP connection
 def InitializeConnection():
     global s  # Access the global variable s
     try:
@@ -35,6 +35,7 @@ def InitializeConnection():
     socket_receive_process = multiprocessing.Process(target=ReceiveMessage, args=(child_conn,))
     socket_receive_process.start()
      
+# Test function for sending and receiving message 
 def SendHelloWorld():
         s.sendall(b"Hello, world\n")
         s.sendall(b"This is my message\n")
@@ -42,47 +43,37 @@ def SendHelloWorld():
         print(f"Received {data}")
         time.sleep(3)
 
+# Send seal start and end location to the PLC
 def SendSeal(start_location, end_location, speed, seal_idx):
         SendBreak()
-        
         s.sendall(b"Seal_Data Start Location: " + str.encode(str(start_location)) + b" End Location: " + str.encode(str(end_location)) + b" Speed: " + str.encode(str(speed)) + b"\n")
-        # data = s.recv(1024)
-        # print(f"Received {data}")
         time.sleep(1)
-        
         parent_conn.send(seal_idx)
-        # CloseConnection()
 
+# Let the PLC know a new part is being setup. (operate in manual mode)
 def SendSetupNewPart():
         SendBreak()
         s.sendall(b"setup_new_part\n")
-        # data = s.recv(1024)
-        # print(f"Received {data}")
         time.sleep(1)
         
+# Ask for measurement from the PLC
 def SendSavedStarting():
-
         global socket_receive_process
         socket_receive_process.terminate()
         socket_receive_process.join()  # Wait for the process to terminate
-
-
         s.sendall(b"saved_starting\n")
         data = s.recv(1024)
-        # print(f"Received {data}")
         time.sleep(1)
 
         socket_receive_process = multiprocessing.Process(target=ReceiveMessage, args=(child_conn,))
         socket_receive_process.start()
         return data
 
+# Break the PLC from whatever state it is in. Used to reset into main function on PLC
 def SendBreak():
         s.sendall(b"BREAK\n")
-        # data = s.recv(1024)
-        # print(f"Received {data}")
-        # time.sleep(1)
-        # return data
 
+# Receive a message from PLC
 def ReceiveMessage(conn):
         print("Starting receive message process\n")
         start_measurement = -1
@@ -135,6 +126,7 @@ def ReceiveMessage(conn):
         print("Ending receive message process\n")
         return data
 
+# Send heartbeat to the PLC to ensure connection
 def Heartbeat(kill_sig):
         while(not kill_sig.value):
                 try:
@@ -149,6 +141,7 @@ def Heartbeat(kill_sig):
         print("Ending Hearbeat process\n")
         return
 
+# Close the connection with the PLC
 def CloseConnection():
      print("Sent close connection")
      with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
