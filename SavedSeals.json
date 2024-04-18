@@ -60,8 +60,63 @@
     "die_name": "test",
     "starting_diameter": "3.09",
     "starting_measurement": "5.678101",
-    "ending_diameter": "4.00",
-    "ending_measurement": "6.588101",
+    "ending_diameter": "4.25",
+    "ending_measurement": "6.838101",
+    "speed": "4",
+    "notes": ""
+  },
+  {
+    "part_name": "test large limit",
+    "material": "air",
+    "die_name": "none",
+    "starting_diameter": "6.5",
+    "starting_measurement": "9.035941",
+    "ending_diameter": "18",
+    "ending_measurement": "20.535941",
+    "speed": "6",
+    "notes": ""
+  },
+  {
+    "part_name": "small silver larger starting",
+    "material": "al",
+    "die_name": "die 1",
+    "starting_diameter": "3.5",
+    "starting_measurement": "6.193666",
+    "ending_diameter": "4.25",
+    "ending_measurement": "6.943666",
+    "speed": "4",
+    "notes": ""
+  },
+  {
+    "part_name": "caliper test 1",
+    "material": "air",
+    "die_name": "none",
+    "starting_diameter": "1.781",
+    "starting_measurement": "5.676888",
+    "ending_diameter": "2.5",
+    "ending_measurement": "6.395888",
+    "speed": "6",
+    "notes": ""
+  },
+  {
+    "part_name": "caliper test 2",
+    "material": "air",
+    "die_name": "none",
+    "starting_diameter": "5.123",
+    "starting_measurement": "9.072030",
+    "ending_diameter": "6.000",
+    "ending_measurement": "9.94903",
+    "speed": "6",
+    "notes": ""
+  },
+  {
+    "part_name": "caliper test 3",
+    "material": "air",
+    "die_name": "none",
+    "starting_diameter": "3.189",
+    "starting_measurement": "7.099846",
+    "ending_diameter": "5",
+    "ending_measurement": "8.910846",
     "speed": "6",
     "notes": ""
   }
