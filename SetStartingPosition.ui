@@ -65,14 +65,14 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>90</x>
       <y>220</y>
-      <width>241</width>
+      <width>271</width>
       <height>78</height>
      </rect>
     </property>
     <property name="text">
-     <string>Measured Starting Distance (in):</string>
+     <string>Measured Starting Distance (inches):</string>
     </property>
    </widget>
    <widget class="QPushButton" name="starting_position_save_button">
